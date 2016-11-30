@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+    <script>
+        $(document).ready(function () {
+            $("#outlink").hide();
+        })
+    </script>
+    <div class="centered">
+        <div class="notlogged">Отказано в доступе.</div><br>
+    <a href="{{ url_for('index') }}" >Вернуться к начальной странице.</a>
+    </div>
+{% endblock %}

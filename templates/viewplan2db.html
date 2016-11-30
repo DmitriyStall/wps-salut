@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript"> //скрипт передающий на сервер инфу с инпутов - логин нового пользователя, пасс, подразделение
+  $(function() {
+    var Transmit_newUserlog_pass = function(e) {
+       // alert("das");
+      $.getJSON($SCRIPT_ROOT + '/adduser',
+              {
+                  UserLogin: $('input[name="newuserlogin"]').val(),
+                  UserPass: $('input[name="newuserpass"]').val(),
+                  UserDepartment: $('input[name="newuserdepartment"]').val()
+              },
+              function(data) {
+                  if (data.result =="newUser_added") {
+                      alert("New user added to DB !");
+                      document.getElementById(id="newuserlogin").value = null;
+                      document.getElementById(id="newuserpass").value = null;
+                      document.getElementById(id="newuserdepartment").value = null;
+                      location.reload();
+                  } else {
+                      alert("New user isn't added to DB !");
+                  }
+              });
+        return false;
+    };
+    $('button[id="addUser"]').bind('click', Transmit_newUserlog_pass);
+  });
+</script>
+    <script type="text/javascript"> //скрипт передающий инфу с инпута логина для удаления юзера
+  $(function() {
+    var Transmit_delUser = function(e) {
+       // alert("das");
+      $.getJSON($SCRIPT_ROOT + '/deluser',
+              {
+                  UserLogin: $('input[name="newuserlogin"]').val()
+              },
+              function(data) {
+                  if (data.result == "User_del") {
+                      alert("User deleted !");
+                      document.getElementById(id="newuserlogin").value = null;
+                      document.getElementById(id="newuserpass").value = null;
+                      document.getElementById(id="newuserdepartment").value = null;
+                  } else {
+                      alert("User isn't deleted !");
+                  }
+      });
+        return false;
+    };
+    $('button[id="delUser"]').bind('click', Transmit_delUser);
+  });
+</script>
+     <script type="text/javascript">
+
+     </script>
+
+<body>
+<select style="width: 100px; height: 40px" id="PlanSelect">
+    <option value="Users">Users</option>
+    <option value="Plan2">Plan 2</option>
+    <option value="Plan3">Plan 3</option>
+    <option value="Plan4">Plan 4</option>
+    <option value="Plan5">Plan 5</option>
+</select>
+<input type='button' value='Загрузить БД' onclick='alert(document.getElementById("PlanSelect").value)' />
+
+
+<div>
+     <label>
+         Логин: <input type="text" name="newuserlogin" id="newuserlogin" />
+     </label>
+    <br>
+    <label>
+        Пароль: <input type="text" name="newuserpass" id="newuserpass" />
+    </label>
+    <br>
+    <label>
+        Подразделение: <input type="text" name="newuserdepartment" id="newuserdepartment" />
+    </label>
+</div>
+
+<button id="addUser">Добавить Юзера</button>
+<button id="delUser">Удалить Юзера</button><br>
+<br>
+<div>{{ tabletoprint }}</div>
+{% endblock %}

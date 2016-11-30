@@ -1,0 +1,133 @@
+<html>
+<head>
+<link href="/static/print.css" rel="stylesheet"/>
+<script type="text/javascript"
+    src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+</head>
+<body>
+<div id="redcardtoprintdialog" class="main" title="Вид КК для печати">
+        <div id="front" class="redcard">
+            <div class="leftredpanelfront"></div>
+                <div class="frontinfo">
+                    <div class="stringfield_fillright centered margedleft">
+                        <label for="WorkDOer">ИСПОЛНИТЕЛЬ</label>
+                        <span><input type="text" value="{{ infofromdb.WorkDOer }}" readonly /></span>
+                    </div>
+                    <div class="stringfield_fillright centered bolded padbottom">
+                        <label for="WorkDOer">КОНТРОЛЬНАЯ КАРТОЧКА №</label>
+                        <span><input type="text" value="{{ infofromdb.CardNumber }}" readonly /></span>
+                    </div>
+                    <div class="stringfield_fillright centered">
+                        <label for="DocFromWhere">От кого получен </label>
+                        <span><input type="text" value="{{ infofromdb.DocFromWhere }}" readonly /></span>
+                    </div>
+                    <div class="stringfield_fillright centered" style="padding-top: 5px; padding-bottom: 5px;">
+                        <label for="DocName">Наименование документа </label>
+                        <span><input type="text"  value="{{ infofromdb.DocName }}" readonly /></span>
+                    </div>
+                    <div class="stringfield centered">
+                        <label for="DocID">№ </label>
+                        <input type="text" name="DocID" id="DocID" value="{{ infofromdb.DocID }}" readonly />
+                        <label for="DocDate">от </label>
+                        <input type="text" name="DocDate" id="DocDate" value="{{ infofromdb.DocDate }}" readonly />
+                        <label for="WorkDueTo">Срок исполнения </label>
+                        <input type="text" name="WorkDueTo" id="WorkDueTo" value="{{ infofromdb.WorkDueTo }}" readonly />
+                    </div>
+                    <div class="stringfield_fillright">
+                        <span><hr style="margin-top: 3px;"></span>
+                        <span><hr></span>
+                    </div>
+                    <div style="float: left;">Краткое содержание</div>
+                    <div style="display: inline-block; margin-left: 50px">Контрольный срок</div>
+                    <div class="stringfield_fillright" style="padding-top: 10px">
+                         <span><input type="text" value="{{ infofromdb.WorkDesc }}" readonly/></span>
+                    </div>
+                    <div class="stringfield_fillright" style="padding-top: 10px">
+                         <span><input type="text" readonly/></span>
+                    </div>
+                    <div class="stringfield_fillright" style="padding-top: 10px">
+                         <span><input type="text" readonly /></span>
+                    </div>
+                    <div class="stringfield_fillright" style="padding-top: 10px">
+                        <span><input type="text" readonly/></span>
+                    </div>
+                    <div class="stringfield_fillright">
+                        <label for="Who">Резолюция т. </label>
+                        <span><input type="text" readonly /></span>
+                    </div>
+                    <div class="stringfield_fillright">
+                         <span><input type="text" readonly/></span>
+                    </div>
+                    <div class="stringfield">
+                        "<input type="text" id="OsobSlu4" readonly />"
+                        <input type="text"  readonly />
+                        20
+                        <input type="text" id="OsobSlu4" readonly /> г.
+                    </div>
+                </div>
+        </div>
+        <div id="rear" class="redcard">
+            <div class="leftredpanelrear"></div>
+                <div class="rearinfo">
+                    <div class="stringfield_fillright centered" style="margin-bottom: 5px; padding-top: 10px;">
+                        <label for="WorkTaker">Приемщиком работ является </label>
+                        <span><input type="text" value="{{ infofromdb.WorkTaker }}" readonly /></span>
+                    </div>
+                    <div class="stringfield_fillright" style="padding-bottom: 5px">
+                        <label for="WorkTaker">Работа (указать содержание) </label>
+                        <span><input type="text" readonly /></span>
+                    </div>
+                    <div class="stringfield_fillright margbottdesc">
+                         <span><input type="text" readonly/></span>
+                    </div>
+                    <div class="stringfield_fillright margbottdesc">
+                        <span><input type="text" readonly/></span>
+                    </div>
+                    <div class="stringfield_fillright margbottdesc">
+                         <span><input type="text" readonly/></span>
+                    </div>
+                    <div class="stringfield_fillright margbottdesc">
+                         <span><input type="text" readonly/></span>
+                    </div>
+                    <div class="stringfield_fillright margbottdesc">
+                         <span><input type="text" readonly/></span>
+                    </div>
+                    <div>
+                        <div class="stringfield centered" style="float: left;">
+                            <label>Дата </label>
+                            <input type="text" style="width: 100px;" readonly />
+                        </div>
+                        <div class="stringfield_fillright">
+                            <label style="margin-left: 50px;">Подпись исполнителя </label>
+                            <span><input type="text" readonly /></span>
+                        </div>
+                    </div>
+                    <p align="center" style="margin-bottom: 0px;">Подтверждено выполнение работ:</p>
+                    <div style="border: 1px solid white; margin-bottom: 4px">
+                        <div class="stringfield centered" style="float: left;">
+                            <label>Дата </label>
+                            <input type="text" style="width: 100px;" readonly />
+                        </div>
+                        <div class="stringfield_fillright">
+                            <label style="margin-left: 50px;">Подпись </label>
+                            <span><input type="text" readonly/></span>
+                        </div>
+                    </div>
+                    <div class="stringfield_fillright"style="border: 0px solid black; padding-top: 10px;">
+                        <label>Для замечаний </label>
+                        <span><input type="text" readonly/></span>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <script>
+            $(document).ready(function(){
+                setTimeout(window.location.href = '/redcardsdb', 1000);
+                window.print();
+            });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="redcardtopmenu">
+        <button id="addredcardDialog">Добавить КК</button>
+        <button id="closeredcardDialog">Сдать КК</button>
+        <button id="postponeredcardDialog">Перенести срок КК</button>
+        <button id="delredcardDialog">Удалить КК</button>
+        <button id="printredcardDialog">Печать КК</button>
+      <!--  <button id="alerttest">Тест alert'a</button> -->
+        <!--  <button id="simplePrint" onclick="printDiv('redcardtoprintdialog')">Печать КК 2</button> -->
+    </div>
+    <div style="text-align: center;">
+        <label for="livefilter">Фильтр:</label>
+        <input class="filter" name="livefilter" type="text" value=""/>
+    </div>
+    <form id="addredcarddialogform" method="POST" action="{{ url_for('addredcard') }}">
+        <div id="addredcarddialog" class="main" title="Добавление новой КК">
+            <div class="field">
+                <label for="newCardNumber">Номер КК: </label>
+                <input type="text" name="newCardNumber" id="newCardNumber" placeholder="Например, 1337"/>
+            </div>
+            <div class="field">
+                <label for="newDOer">Исполнитель: </label>
+                <input type="text" name="newDOer" id="newDOer" placeholder="Например, Брик Э. А."/>
+            </div>
+            <div class="field">
+                <label for="newDocFromWhere">От кого получен документ: </label>
+                <input type="text" name="newDocFromWhere" id="newDocFromWhere"
+                       placeholder="Например, Концерн &quot;Моринсис-Агат&quot;"/>
+            </div>
+            <div class="field">
+                <label for="newDocName">Наименование документа: </label>
+                <input type="text" name="newDocName" id="newDocName" placeholder="Например, Приказ"/>
+            </div>
+            <div class="field">
+                <label for="newDocID">№ документа: </label>
+                <input type="text" name="newDocID" id="newDocID" placeholder="Например, 1337ф"/>
+            </div>
+            <div class="field">
+                <label for="newDocDate">Дата издания документа: </label>
+                <input type="text" name="newDocDate" id="newDocDate" placeholder="ДД.ММ.ГГГГ" onkeyup="
+            var date = this.value;
+                  if (date.match(/^\d{2}$/) !== null) {
+                             this.value = date + '.';
+                  } else if (date.match(/^\d{2}\.\d{2}$/) !== null) {
+                             this.value = date + '.';  }" maxlength="10"/>
+            </div>
+            <div class="field">
+                <label for="newWorkDueTo">Срок исполнения: </label>
+                <input type="text" name="newWorkDueTo" id="newWorkDueTo" placeholder="ДД.ММ.ГГГГ" onkeyup="
+            var date = this.value;
+                  if (date.match(/^\d{2}$/) !== null) {
+                             this.value = date + '.';
+                  } else if (date.match(/^\d{2}\.\d{2}$/) !== null) {
+                             this.value = date + '.';  }" maxlength="10"/>
+            </div>
+            <div class="field">
+                <label for="newWorkTaker">Приёмщик работ: </label>
+                <input type="text" name="newWorkTaker" id="newWorkTaker" placeholder="Например, Пименов В. Г."/>
+            </div>
+            <div class="field">
+                <label for="newWorkDesc">Содержание работы: </label>
+                <textarea type="text" name="newWorkDesc" id="newWorkDesc"></textarea>
+            </div>
+        </div>
+    </form>
+
+    <form id="closeredcardform" method="POST" action="{{ url_for('closeredcard') }}">
+        <div id="closeredcarddialog" class="main" title="Сдача КК">
+            <div class="field">
+                <label for="RedCardToCloseNumber">Номер КК для сдачи: </label>
+                <input type="text" name="RedCardToCloseNumber" id="RedCardToCloseNumber" placeholder="Например, 1337"/>
+            </div>
+            <div class="field">
+                <label for="RedCardCloseDate">Дата сдачи КК: </label>
+                <input type="text" name="RedCardCloseDate" id="RedCardCloseDate" placeholder="ДД.ММ.ГГГГ" onkeyup="
+            var date = this.value;
+                  if (date.match(/^\d{2}$/) !== null) {
+                             this.value = date + '.';
+                  } else if (date.match(/^\d{2}\.\d{2}$/) !== null) {
+                             this.value = date + '.';  }" maxlength="10"/>
+            </div>
+        </div>
+    </form>
+
+    <form id="delredcardform" method="POST" action="{{ url_for('delredcard') }}">
+        <div id="delredcarddialog" class="main" title="Удаление КК">
+            <div class="field">
+                <label for="RedCardToDelNumber">Номер КК для удаления: </label>
+                <input type="text" name="RedCardToDelNumber" id="RedCardToDelNumber" placeholder="Например, 1337"/>
+            </div>
+        </div>
+    </form>
+
+    <form id="postponeredcardform" method="POST" action="{{ url_for('postponeredcard') }}">
+        <div id="postponeredcarddialog" class="main" title="Перенос срока КК">
+            <div class="field">
+                <label for="RedCardToPostponeNumber">Номер КК для переноса: </label>
+                <input type="text" name="RedCardToPostponeNumber" id="RedCardToPostponeNumber"
+                       placeholder="Например, 1337"/>
+            </div>
+            <div class="field">
+                <label for="RedCardToPostponeNewDate">Новый срок: </label>
+                <input type="text" name="RedCardToPostponeNewDate" id="RedCardToPostponeNewDate"
+                       placeholder="ДД.ММ.ГГГГ" onkeyup="
+            var date = this.value;
+                  if (date.match(/^\d{2}$/) !== null) {
+                             this.value = date + '.';
+                  } else if (date.match(/^\d{2}\.\d{2}$/) !== null) {
+                             this.value = date + '.';  }" maxlength="10"/>
+            </div>
+        </div>
+    </form>
+
+    <form id="printredcardform" method="POST" action="{{ url_for('printredcard') }}">
+        <div id="printredcarddialog" class="main" title="Печать КК">
+            <div class="field">
+                <label for="RedCardToPrintNumber">Номер КК для печати: </label>
+                <input type="text" name="RedCardToPrintNumber" id="RedCardToPrintNumber" placeholder="Например, 1337"/>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+
+    <div>{{ tabletoprint }}</div>
+
+    <script type="text/javascript"> //Диалог добавления КК
+    $(document).ready(function () {
+        $('#addredcarddialog').dialog({
+            appendTo: "#addredcarddialogform",
+            autoOpen: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            draggable: true,
+            dialogClass: 'DialogClass',
+            buttons: {
+                "Submit": function () {
+                    $('#addredcarddialogform').submit();
+                    //$('#addredcarddialog').dialog.hide();
+                }
+            }
+        });
+        //$(".ui-dialog-titlebar").hide();
+        $('#addredcardDialog').click(function () {
+            $('#addredcarddialog').dialog('open');
+//                  return false;
+        });
+    })
+    </script>
+
+    <script type="text/javascript"> //Диалог сдачи КК
+    $(document).ready(function () {
+        $('#closeredcarddialog').dialog({
+            appendTo: "#closeredcardform",
+            autoOpen: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            draggable: true,
+            dialogClass: 'DialogClass',
+            buttons: {
+                "Submit": function () {
+                    $('#closeredcardform').submit();
+                }
+            }
+        });
+        //$(".ui-dialog-titlebar").hide();
+        $('#closeredcardDialog').click(function () {
+            $('#closeredcarddialog').dialog('open');
+//                  return false;
+        });
+    })
+    </script>
+
+    <script type="text/javascript"> //Диалог удаления КК
+    $(document).ready(function () {
+        $('#delredcarddialog').dialog({
+            appendTo: "#delredcardform",
+            autoOpen: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            draggable: true,
+            dialogClass: 'DialogClass',
+            buttons: {
+                "Submit": function () {
+                    $('#delredcardform').submit();
+                    //$('#addredcarddialog').dialog.hide();
+                }
+            }
+        });
+        //$(".ui-dialog-titlebar").hide();
+        $('#delredcardDialog').click(function () {
+            $('#delredcarddialog').dialog('open');
+//                  return false;
+        });
+    })
+    </script>
+    <script type="text/javascript"> //Диалог переноса КК
+    $(document).ready(function () {
+        $('#postponeredcarddialog').dialog({
+            appendTo: "#postponeredcardform",
+            autoOpen: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            draggable: true,
+            dialogClass: 'DialogClass',
+            buttons: {
+                "Submit": function () {
+                    $('#postponeredcardform').submit();
+                    //$('#addredcarddialog').dialog.hide();
+                }
+            }
+        });
+        //$(".ui-dialog-titlebar").hide();
+        $('#postponeredcardDialog').click(function () {
+            $('#postponeredcarddialog').dialog('open');
+//                  return false;
+        });
+    })
+    </script>
+    <script type="text/javascript"> //Диалог печати КК
+    $(document).ready(function () {
+        $('#printredcarddialog').dialog({
+            appendTo: "#printredcardform",
+            autoOpen: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            draggable: true,
+            dialogClass: 'DialogClass',
+            buttons: {
+                "Print": function () {
+                    $('#printredcardform').submit();
+                    //printDiv('redcardtoprintdialog');
+                }
+            }
+        });
+        //$(".ui-dialog-titlebar").hide();
+        $('#printredcardDialog').click(function () {
+            $('#printredcarddialog').dialog('open');
+//                  return false;
+        });
+    })
+    </script>
+
+
+    <script type="text/javascript">
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var body = '<html><head><link href="/static/print.css" rel="stylesheet"/></head><body>';
+            w = window.open();
+            w.document.write(body + printContents + '</body></html>');
+            w.document.close();
+            //w.print();
+            //w.close();
+        }
+    </script>
+
+    <script>
+        $("#alerttest").bind('click', function () {
+            alert('Hi');
+        });
+    </script>
+
+{% endblock %}

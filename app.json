@@ -1,0 +1,8 @@
+{
+  "name": "WPS-Salut",
+  "description": "Work planning system",
+  "image": "heroku/python",
+  "repository": "https://github.com/DmitriyStall/wps.git",
+  "keywords": ["python", "flask" ],
+  "addons": [ "heroku-postgresql" ]
+}

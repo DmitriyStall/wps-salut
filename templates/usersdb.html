@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="redcardtopmenu">
+        <button id="adduserDialog">Добавить пользователя</button>
+        <button id="deluserDialog">Удалить пользователя</button>
+        <button id="edituserDialog">Редактировать данных о пользователе</button>
+      <!--  <button id="alerttest">Тест alert'a</button> -->
+        <!--  <button id="simplePrint" onclick="printDiv('redcardtoprintdialog')">Печать КК 2</button> -->
+    </div>
+    <div style="text-align: center;">
+        <label for="livefilter">Фильтр:</label>
+        <input class="filter" name="livefilter" type="text" value=""/>
+    </div>
+    <form id="adduserdialogform" method="POST" action="{{ url_for('adduser') }}">
+        <div id="adduserdialog" class="main" title="Добавление нового пользователя">
+            <div class="field">
+                <label for="newUserLogin">Номер КК: </label>
+                <input type="text" name="newUserLogin" id="newUserLogin" placeholder="Например, ZherebtsovDV"/>
+            </div>
+            <div class="field">
+                <label for="newUserPass">Исполнитель: </label>
+                <input type="password" name="newUserPass" id="newUserPass" placeholder="Например, ****"/>
+            </div>
+            <div class="field">
+                <label for="newUserDepartment">От кого получен документ: </label>
+                <input type="text" name="newUserDepartment" id="newUserDepartment"
+                       placeholder="Например, Концерн &quot;Моринсис-Агат&quot;"/>
+            </div>
+            <div class="field">
+                <label for="newDocName">Наименование документа: </label>
+                <input type="text" name="newDocName" id="newDocName" placeholder="Например, Приказ"/>
+            </div>
+        </div>
+    </form>
+
+
+    <form id="deluserform" method="POST" action="{{ url_for('deluser') }}">
+        <div id="deluserdialog" class="main" title="Удаление пользователя">
+            <div class="field">
+                <label for="UserToDelNumber">Номер КК для удаления: </label>
+                <input type="text" name="RedCardToDelNumber" id="RedCardToDelNumber" placeholder="Например, 1337"/>
+            </div>
+        </div>
+    </form>
+
+    <form id="edituserform" method="POST" action="{{ url_for('adduser') }}">
+        <div id="edituserdialog" class="main" title="Редактивание данных пользователя">
+            <div class="field">
+                <label for="RedCardToDelNumber">Номер КК для удаления: </label>
+                <input type="text" name="RedCardToDelNumber" id="RedCardToDelNumber" placeholder="Например, 1337"/>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div>{{ tabletoprint }}</div>
+    <script type="text/javascript"> // Диалог добавления пользователя
+    $(document).ready(function () {
+        $('#adduserdialog').dialog({
+            appendTo: "#adduserdialogform",
+            autoOpen: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            draggable: true,
+            dialogClass: 'DialogClass',
+            buttons: {
+                "Submit": function () {
+                    $('#adduserdialogform').submit();
+                    //$('#addredcarddialog').dialog.hide();
+                }
+            }
+        });
+        //$(".ui-dialog-titlebar").hide();
+        $('#adduserDialog').click(function () {
+            $('#adduserdialog').dialog('open');
+//                  return false;
+        });
+    })
+    </script>
+    <script type="text/javascript"> // Диалог удаления пользователя
+    $(document).ready(function () {
+        $('#deluserdialog').dialog({
+            appendTo: "#deluserform",
+            autoOpen: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            draggable: true,
+            dialogClass: 'DialogClass',
+            buttons: {
+                "Submit": function () {
+                    $('#deluserform').submit();
+                    //$('#addredcarddialog').dialog.hide();
+                }
+            }
+        });
+        //$(".ui-dialog-titlebar").hide();
+        $('#deluserDialog').click(function () {
+            $('#deluserdialog').dialog('open');
+//                  return false;
+        });
+    })
+    </script>
+
+    <script type="text/javascript"> // Диалог редактирования пользователя
+    $(document).ready(function () {
+        $('#edituserdialog').dialog({
+            appendTo: "#edituserform",
+            autoOpen: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            draggable: true,
+            dialogClass: 'DialogClass',
+            buttons: {
+                "Submit": function () {
+                    $('#edituserform').submit();
+                    //$('#addredcarddialog').dialog.hide();
+                }
+            }
+        });
+        //$(".ui-dialog-titlebar").hide();
+        $('#edituserDialog').click(function () {
+            $('#edituserdialog').dialog('open');
+//                  return false;
+        });
+    })
+    </script>
+
+
+
+{% endblock %}

@@ -1,0 +1,34 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>WPS - Salute !</title>
+
+    <script type="text/javascript"
+            src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://github.com/erikzaadi/jQueryPlugins/raw/master/jQuery.printElement/jquery.printElement.min.js">
+    </script>
+    <script type="text/javascript">
+        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="http://ruseller.com/lessons/les763/demo/jquery.liveFilter.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('table#filtered').liveFilter('fade');
+        });
+    </script>
+    <link href="{{ url_for('static', filename='css_bs/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
+    {% block head %}{% endblock %}
+</head>
+<body>
+<div id="outlink"><a href="{{ url_for('logout') }}">Выход</a></div>
+{% block body %}{% endblock %}
+<div id="rightbottomlogo">
+    <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='Logo_h100px.png') }}"></a>
+</div>
+</body>

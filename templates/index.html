@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='loginformstyle.css') }}">
+{% endblock %}
+{% block body %}
+    <script>
+        $(document).ready(function () {
+            $(".alertjs").hide();
+            $("#outlink").hide();
+            $("#rightbottomlogo").hide();
+        })
+    </script>
+   <!-- <button id="alertbutton"><b>ALERT</b></button> -->
+    <!--  <button id="alerttest">Тест alert'a</button> -->
+    <form method="post" action="{{ url_for('drop_db') }}">
+        <button>Дропнуть БД</button>
+    </form>
+    <form method="post" action="{{ url_for('initdb') }}">
+        <button>Создать и инициализировать БД</button>
+    </form>
+    <form method="post" action="{{ url_for('PostLoginPass') }}">
+        <div class="login-page">
+            <div class="form">
+                <div class="formlogo">
+                    <a href="/"><img src="{{ url_for('static', filename='Logo_h100px.png') }}"></a>
+                </div>
+                <!-- <form class="login-form"> -->
+                <input name="LoginInput" type="text" placeholder="Логин" id="linput"/>
+                <input name="PassInput" type="password" placeholder="Пароль" id="pinput"/>
+                <button id="loginbutton"><b>в х о д</b></button><br>
+
+
+            </div>
+            <div class="alert alert-danger alertjs" role="alert"><b>ОШИБКА! </b>Не введен логин/пароль.</div>
+            <div> <!-- здесь алерт нужен для неправильно введенного логина или пароля -->
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger alertflash" role="alert"><b>ОШИБКА! </b>{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </form>
+    <form method="post" action="{{ url_for('adduser') }}">
+        <input name="LoginInput" type="text" placeholder="Логин" id="linput"/>
+        <input name="PassInput" type="password" placeholder="Пароль" id="pinput"/>
+        <button id="loginbutton"><b>Создать пользователя</b></button>
+    </form>
+    <script>
+        $("#loginbutton").bind('click', function () {
+            if (document.getElementById("linput").value == "" || document.getElementById("pinput").value == "") {
+                document.getElementById("linput").value = "";
+                document.getElementById("pinput").value = "";
+                $(".alertjs").fadeTo(4000, 500).slideUp(500, function () {
+                    $(".alertjs").slideUp(500);
+                });
+                return false;
+            }
+        });
+        </script>
+    <script>
+        $("#alertbutton").bind('click', function () {
+            alert('123');
+        });
+    </script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $(".alertflash").fadeTo(4000, 500).slideUp(500, function () {
+                $(".alertflash").slideUp(500);
+            });
+        });
+    </script>
+{% endblock %}

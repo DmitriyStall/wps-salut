@@ -1,0 +1,120 @@
+
+
+body {
+    margin: 0px;
+}
+
+.stringfield_fillright label {
+    display: inline-block;
+    float: left;
+}
+
+
+.leftredpanelfront {
+    float: left;
+    width: 5%;
+    height: 100%;
+    background-color: red;
+    margin-right: 5px;
+}
+.leftredpanelrear {
+    margin-top: 1px;
+    float: left;
+    width: 5%;
+    height: 100%;
+    background-color: red;
+    margin-right: 5px;
+}
+
+.margbottdesc {
+    margin-bottom: 10px;
+}
+
+.stringfield_fillright input {
+    margin-left: 5px;
+    width: 100%;
+}
+
+.stringfield_fillright hr {
+    width: 100%;
+    margin-top: 0px;
+}
+
+
+.margedleft label {
+    margin-left: 80px;
+}
+
+.padbottom {
+    padding-bottom: 15px;
+}
+
+.bolded label {
+    font-weight: bold;
+}
+
+.centered input{
+    text-align: center;
+}
+
+input {
+
+    font-family: "Times New Roman";
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+span {
+    display: block;
+    overflow: hidden;
+    /*padding-right:10px;*/
+}
+
+
+
+.redcard {
+    height: 9.5cm;
+    width: 13cm;
+    /*border: 1px solid black;*/
+}
+
+#rear {
+    page-break-before: always;
+}
+
+
+.frontinfo {
+    width: 95%;
+}
+
+.rearinfo {
+    width: 95%;
+}
+
+
+
+.stringfield input[name = "DocID"] {
+    width: 70px;
+}
+
+
+.stringfield input[name = "DocDate"] {
+    width: 70px;
+}
+
+
+.stringfield input[name = "WorkDueTo"] {
+    width: 127px;
+}
+
+.stringfield input[id = "OsobSlu4"] {
+    width: 40px;
+}
+
+
+
+
+
+
+
