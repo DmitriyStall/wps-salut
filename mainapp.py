@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, flash, jsonify, render_template, Response, request, flash, json, redirect, session, url_for
 from database import db_session, init_db
 from models import User, RedCard
@@ -102,7 +103,7 @@ def adduser():
         db_session.commit()
         return redirect(url_for('index'))
     else:
-        return print('Юзер не добавлен')
+        return ('Юзер не добавлен')
 
 
 @app.route('/deluser', methods=['POST'])  # Удаление юзера из БД
