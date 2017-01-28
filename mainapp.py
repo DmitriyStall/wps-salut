@@ -127,7 +127,7 @@ def drop_db():
 
 @app.route('/initdb', methods=['POST'])
 def initdb():
-    create_database('postgresql+psycopg2://srxdxxcptkauew:Yz1q0Kz08Bl1x23RlL5JtPZZiR@ec2-107-20-198-81.compute-1.amazonaws.com:5432/d1k62e07m88b3g')
+    create_database('postgresql+psycopg2://dhuougvpvjteqs:c237462613ab7c92b9d5382e7a2f0fea29ac74e46904b58c6e8f043f1cbd8faf@ec2-79-125-13-42.eu-west-1.compute.amazonaws.com:5432/ddtpe15um8rbnq')
     init_db()
     return '''initiated
     <br>
