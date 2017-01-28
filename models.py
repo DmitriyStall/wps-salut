@@ -25,11 +25,11 @@ class RedCard(Base):
     DocFromWhere = Column(String(100), unique = False)
     DocName = Column(String(30), unique = False)
     DocID = Column(String(10), unique = False)
-    DocDate = Column(Integer, unique = False)
-    WorkDueTo = Column(Integer, unique=False)
+    DocDate = Column(String(10), unique = False)
+    WorkDueTo = Column(String(10), unique=False)
     WorkDesc = Column(String(100), unique=False)
     WorkTaker = Column(String(50), unique=False)
-    WorkClosedDate = Column(Integer, unique=False)
+    WorkClosedDate = Column(String(10), unique=False)
     def __init__(self, CardNumber = None, CardStatus = None, WorkDOer = None, DocFromWhere = None, DocName = None, DocID = None, DocDate = None, WorkDueTo = None, WorkDesc = None, WorkTaker = None, WorkClosedDate = None):
         self.CardStatus = CardStatus
         self.CardNumber = CardNumber

@@ -91,7 +91,6 @@ def redcardsdb():
 
 
 @app.route('/adduser', methods=['POST'])  # Добавление нового юзера в БД
-@authenticate
 def adduser():
     newUserLogin = request.form['LoginInput']
     newUserPass = request.form['PassInput']
@@ -103,11 +102,10 @@ def adduser():
         db_session.commit()
         return redirect(url_for('index'))
     else:
-        return ('Юзер не добавлен')
+        return 'Юзер не добавлен'
 
 
 @app.route('/deluser', methods=['POST'])  # Удаление юзера из БД
-@authenticate
 def deluser():
     delUserLogin = request.args.get('UserLogin', 0, type=str)
     if User.query.filter(User.login == delUserLogin).first():
@@ -120,7 +118,7 @@ def deluser():
 
 @app.route('/dropdb', methods=['POST'])
 def drop_db():
-    drop_database('postgresql+psycopg2://postgres:admin@127.0.0.1:5432/ggg')
+    drop_database('postgresql+psycopg2://srxdxxcptkauew:Yz1q0Kz08Bl1x23RlL5JtPZZiR@ec2-107-20-198-81.compute-1.amazonaws.com:5432/d1k62e07m88b3g')
     return '''dropped
     <br>
     <a href="/">Вернуться</a>
@@ -129,7 +127,7 @@ def drop_db():
 
 @app.route('/initdb', methods=['POST'])
 def initdb():
-    create_database('postgresql+psycopg2://postgres:admin@127.0.0.1:5432/ggg')
+    create_database('postgresql+psycopg2://srxdxxcptkauew:Yz1q0Kz08Bl1x23RlL5JtPZZiR@ec2-107-20-198-81.compute-1.amazonaws.com:5432/d1k62e07m88b3g')
     init_db()
     return '''initiated
     <br>
@@ -139,7 +137,6 @@ def initdb():
 
 
 @app.route('/addredcard', methods=['POST'])  # Добавление новой красной карточки в БД
-@authenticate
 def addredcard():
     newDOer = request.form['newDOer']
     if newDOer != '':
@@ -162,7 +159,6 @@ def addredcard():
 
 
 @app.route('/closeredcard', methods=['POST'])  # Редактирование красной карточки из БД
-@authenticate
 def closeredcard():
     RedCardToClose = request.form['RedCardToCloseNumber']
     RedCardCloseDate = request.form['RedCardCloseDate']
@@ -180,7 +176,6 @@ def closeredcard():
 
 
 @app.route('/delredcard', methods=['POST'])  # Редактирование красной карточки из БД
-@authenticate
 def delredcard():
     RedCardToDelNumber = request.form['RedCardToDelNumber']
     print(RedCardToDelNumber)
@@ -193,7 +188,6 @@ def delredcard():
 
 
 @app.route('/printredcard', methods=['POST'])  # Выдача данных для печати красной карточки из БД
-@authenticate
 def printredcard():
     CardNumberToPrint = request.form['RedCardToPrintNumber']
     if RedCard.query.filter(RedCard.CardNumber == CardNumberToPrint).first():
@@ -204,7 +198,6 @@ def printredcard():
 
 
 @app.route('/postponeredcard', methods=['POST'])  # Добавление новой красной карточки в БД
-@authenticate
 def postponeredcard():
     RedCardToPostponeNumber = request.form['RedCardToPostponeNumber']
     RedCardToPostponeNewDate = request.form['RedCardToPostponeNewDate']
