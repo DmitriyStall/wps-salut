@@ -5,6 +5,10 @@ from models import User, RedCard
 from flask_table import Table, Col, ButtonCol, OptCol
 from functools import wraps
 from sqlalchemy_utils import drop_database, create_database
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
 class UsersTable(Table):
@@ -118,7 +122,7 @@ def deluser():
 
 @app.route('/dropdb', methods=['POST'])
 def drop_db():
-    drop_database('postgresql+psycopg2://dhuougvpvjteqs:c237462613ab7c92b9d5382e7a2f0fea29ac74e46904b58c6e8f043f1cbd8faf@ec2-79-125-13-42.eu-west-1.compute.amazonaws.com:5432/ddtpe15um8rbnq')
+    drop_database('postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/postgres1')
     return '''dropped
     <br>
     <a href="/">Вернуться</a>
@@ -127,7 +131,7 @@ def drop_db():
 
 @app.route('/initdb', methods=['POST'])
 def initdb():
-    create_database('postgresql+psycopg2://dhuougvpvjteqs:c237462613ab7c92b9d5382e7a2f0fea29ac74e46904b58c6e8f043f1cbd8faf@ec2-79-125-13-42.eu-west-1.compute.amazonaws.com:5432/ddtpe15um8rbnq')
+    create_database('postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/postgres1')
     init_db()
     return '''initiated
     <br>
