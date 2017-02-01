@@ -122,7 +122,7 @@ def deluser():
 
 @app.route('/dropdb', methods=['POST'])
 def drop_db():
-    drop_database('dhuougvpvjteqs:c237462613ab7c92b9d5382e7a2f0fea29ac74e46904b58c6e8f043f1cbd8faf@ec2-79-125-13-42.eu-west-1.compute.amazonaws.com:5432/ddtpe15um8rbnq')
+    drop_database('postgresql+psycopg2://dhuougvpvjteqs:c237462613ab7c92b9d5382e7a2f0fea29ac74e46904b58c6e8f043f1cbd8faf@ec2-79-125-13-42.eu-west-1.compute.amazonaws.com:5432/ddtpe15um8rbnq')
     return '''dropped
     <br>
     <a href="/">Вернуться</a>
@@ -131,7 +131,7 @@ def drop_db():
 
 @app.route('/initdb', methods=['POST'])
 def initdb():
-    create_database('dhuougvpvjteqs:c237462613ab7c92b9d5382e7a2f0fea29ac74e46904b58c6e8f043f1cbd8faf@ec2-79-125-13-42.eu-west-1.compute.amazonaws.com:5432/ddtpe15um8rbnq')
+    create_database('postgresql+psycopg2://dhuougvpvjteqs:c237462613ab7c92b9d5382e7a2f0fea29ac74e46904b58c6e8f043f1cbd8faf@ec2-79-125-13-42.eu-west-1.compute.amazonaws.com:5432/ddtpe15um8rbnq')
     init_db()
     return '''initiated
     <br>
